@@ -102,9 +102,12 @@
   }
   button:hover { background: var(--bordeaux); color: var(--cream); }
   .error-msg {
-    font-size: 0.75rem; color: var(--bordeaux);
-    letter-spacing: 0.08em; opacity: 0;
-    height: 1rem; transition: opacity 0.3s;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem; font-style: italic;
+    color: var(--bordeaux);
+    letter-spacing: 0.04em; opacity: 0;
+    min-height: 1.4rem; transition: opacity 0.4s;
+    margin-top: 0.4rem;
   }
   .error-msg.show { opacity: 1; }
   .shake { animation: shake 0.4s ease; }
@@ -137,21 +140,30 @@
     né in distanze.<br><br>
     È la promessa silenziosa<br>
     che si fa con gli occhi,<br>
-    senza dire nulla.
+    senza dire nulla.<br><br>
+    <em style="color: var(--bordeaux); font-size: 1.1em;">Sempre e…</em>
   </p>
-
-  <p class="hint">tutto attaccato, senza spazi</p>
 
   <div>
     <input type="text" id="answer" placeholder="…" maxlength="30" autocomplete="off" autocorrect="off" spellcheck="false">
   </div>
 
-  <p class="error-msg" id="err">Non è quella. Un ultimo tentativo.</p>
+  <p class="error-msg" id="err"></p>
 
   <button onclick="check()">Scopri →</button>
 </div>
 
 <script>
+  const frasi = [
+    "Ci sei quasi, amore…",
+    "È una parola senza fine.",
+    "Come il nostro tempo insieme.",
+    "Non smettere di cercare.",
+    "Lo sento che lo sai.",
+    "È scritta nel tuo cuore.",
+  ];
+  let idx = 0;
+
   document.getElementById('answer').addEventListener('keydown', e => {
     if (e.key === 'Enter') check();
   });
@@ -166,7 +178,12 @@
       card.classList.remove('shake');
       void card.offsetWidth;
       card.classList.add('shake');
-      document.getElementById('err').classList.add('show');
+      const err = document.getElementById('err');
+      err.classList.remove('show');
+      void err.offsetWidth;
+      err.textContent = frasi[idx % frasi.length];
+      idx++;
+      err.classList.add('show');
     }
   }
 </script>
