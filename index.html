@@ -12,8 +12,6 @@
   :root {
     --cream: #f7f3ee;
     --bordeaux: #6b1e2e;
-    --bordeaux-light: #8b2d3f;
-    --bordeaux-faint: rgba(107, 30, 46, 0.08);
     --text: #2a1a1f;
     --muted: #9a8a8e;
   }
@@ -29,27 +27,19 @@
     align-items: center;
     justify-content: center;
     padding: 2rem;
-    overflow: hidden;
   }
 
-  /* Decorative corner lines */
   body::before, body::after {
     content: '';
     position: fixed;
-    width: 120px;
-    height: 120px;
+    width: 120px; height: 120px;
     border-color: var(--bordeaux);
     border-style: solid;
     opacity: 0.2;
+    pointer-events: none;
   }
-  body::before {
-    top: 2rem; left: 2rem;
-    border-width: 1px 0 0 1px;
-  }
-  body::after {
-    bottom: 2rem; right: 2rem;
-    border-width: 0 1px 1px 0;
-  }
+  body::before { top: 2rem; left: 2rem; border-width: 1px 0 0 1px; }
+  body::after  { bottom: 2rem; right: 2rem; border-width: 0 1px 1px 0; }
 
   .step-label {
     font-family: 'Montserrat', sans-serif;
@@ -90,8 +80,7 @@
   }
 
   .divider {
-    width: 40px;
-    height: 1px;
+    width: 40px; height: 1px;
     background: var(--bordeaux);
     margin: 1.8rem auto;
     opacity: 0.4;
@@ -103,27 +92,21 @@
     font-weight: 300;
     line-height: 1.8;
     color: var(--text);
-    margin-bottom: 0.6rem;
+    margin-bottom: 1.6rem;
   }
 
   .hint {
     font-size: 0.72rem;
     letter-spacing: 0.12em;
     color: var(--muted);
-    margin-bottom: 2.5rem;
-  }
-
-  .input-wrap {
-    position: relative;
-    margin-bottom: 0.8rem;
+    margin-bottom: 1.6rem;
   }
 
   input[type="text"] {
     width: 100%;
     background: transparent;
     border: none;
-    border-bottom: 1px solid var(--bordeaux);
-    border-bottom-color: rgba(107, 30, 46, 0.35);
+    border-bottom: 1px solid rgba(107,30,46,0.35);
     padding: 0.8rem 0.2rem;
     font-family: 'Cormorant Garamond', serif;
     font-size: 1.3rem;
@@ -133,6 +116,7 @@
     letter-spacing: 0.1em;
     outline: none;
     transition: border-color 0.3s;
+    display: block;
   }
   input[type="text"]::placeholder { color: var(--muted); font-style: italic; }
   input[type="text"]:focus { border-bottom-color: var(--bordeaux); }
@@ -151,24 +135,22 @@
     cursor: pointer;
     transition: all 0.3s;
   }
-  button:hover {
-    background: var(--bordeaux);
-    color: var(--cream);
-  }
+  button:hover { background: var(--bordeaux); color: var(--cream); }
 
   .error-msg {
-    font-size: 0.75rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    font-style: italic;
     color: var(--bordeaux);
-    letter-spacing: 0.08em;
+    letter-spacing: 0.04em;
     opacity: 0;
-    height: 1rem;
-    transition: opacity 0.3s;
+    min-height: 1.6rem;
+    transition: opacity 0.4s;
+    margin-top: 0.8rem;
   }
   .error-msg.show { opacity: 1; }
 
-  .shake {
-    animation: shake 0.4s ease;
-  }
+  .shake { animation: shake 0.4s ease; }
 
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(18px); }
@@ -176,8 +158,8 @@
   }
   @keyframes shake {
     0%,100% { transform: translateX(0); }
-    25% { transform: translateX(-8px); }
-    75% { transform: translateX(8px); }
+    25%     { transform: translateX(-8px); }
+    75%     { transform: translateX(8px); }
   }
 </style>
 </head>
@@ -201,32 +183,48 @@
 
   <p class="hint">scrivi la data senza spazi né trattini &nbsp;·&nbsp; es. 01011970</p>
 
-  <div class="input-wrap">
-    <input type="text" id="answer" placeholder="ggmmaaaa" maxlength="8" autocomplete="off" autocorrect="off" spellcheck="false">
-  </div>
+  <input type="text" id="answer" placeholder="ggmmaaaa" maxlength="8" autocomplete="off" autocorrect="off" spellcheck="false">
 
-  <p class="error-msg" id="err">Non è quella. Cercala nel cuore.</p>
+  <p class="error-msg" id="err"></p>
 
   <button onclick="check()">Continua →</button>
 </div>
 
 <script>
+  const frasi = [
+    "Non è quella. Cercala nel cuore.",
+    "Un giorno speciale, impossibile dimenticarlo.",
+    "È scritto da qualche parte, ci sei quasi.",
+    "Quel giorno è cambiato tutto.",
+  ];
+  let idx = 0;
+
+  document.querySelector('.card').addEventListener('animationend', function() {
+    this.style.animation = 'none';
+    this.style.opacity = '1';
+  }, { once: true });
+
   document.getElementById('answer').addEventListener('keydown', e => {
     if (e.key === 'Enter') check();
   });
 
   function check() {
-    const val = document.getElementById('answer').value.trim().toLowerCase().replace(/\s/g,'');
+    const val = document.getElementById('answer').value.trim().replace(/\s/g,'');
     if (val === '25052025') {
       document.querySelector('.card').style.transition = 'opacity 0.6s';
       document.querySelector('.card').style.opacity = '0';
       setTimeout(() => window.location.href = 'tappa2.html', 650);
     } else {
-      const card = document.querySelector('.card');
-      card.classList.remove('shake');
-      void card.offsetWidth;
-      card.classList.add('shake');
-      document.getElementById('err').classList.add('show');
+      const input = document.getElementById('answer');
+      input.classList.remove('shake');
+      void input.offsetWidth;
+      input.classList.add('shake');
+      const err = document.getElementById('err');
+      err.classList.remove('show');
+      void err.offsetWidth;
+      err.textContent = frasi[idx % frasi.length];
+      idx++;
+      err.classList.add('show');
     }
   }
 </script>
