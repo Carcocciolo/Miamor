@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Per Miriam</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --cream: #f7f3ee;
+    --bordeaux: #6b1e2e;
+    --text: #2a1a1f;
+    --muted: #9a8a8e;
+  }
+  body {
+    background: var(--cream);
+    color: var(--text);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 2rem;
+  }
+  body::before, body::after {
+    content: ''; position: fixed;
+    width: 120px; height: 120px;
+    border-color: var(--bordeaux);
+    border-style: solid; opacity: 0.15;
+  }
+  body::before { top: 2rem; left: 2rem; border-width: 1px 0 0 1px; }
+  body::after  { bottom: 2rem; right: 2rem; border-width: 0 1px 1px 0; }
+
+  .label {
+    font-size: 0.62rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--bordeaux);
+    margin-bottom: 2.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.1s forwards;
+  }
+
+  .letter {
+    max-width: 600px;
+    width: 100%;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.4s forwards;
+  }
+
+  .ornament {
+    font-size: 1.6rem;
+    color: var(--bordeaux);
+    opacity: 0.35;
+    display: block;
+    text-align: center;
+    letter-spacing: 0.5em;
+    margin-bottom: 2.5rem;
+  }
+
+  .saluto {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.8rem, 5vw, 2.6rem);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--bordeaux);
+    margin-bottom: 2rem;
+    line-height: 1.2;
+  }
+
+  .divider {
+    width: 40px; height: 1px;
+    background: var(--bordeaux);
+    margin-bottom: 2rem; opacity: 0.3;
+  }
+
+  .corpo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+    font-weight: 300;
+    line-height: 2;
+    color: var(--text);
+  }
+  .corpo p { margin-bottom: 1.6rem; }
+  .corpo em {
+    font-style: italic;
+    color: var(--bordeaux);
+  }
+
+  .firma {
+    margin-top: 2.5rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-style: italic;
+    font-weight: 300;
+    color: var(--muted);
+  }
+
+  .data-firma {
+    font-size: 0.68rem;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    margin-top: 0.4rem;
+    text-transform: uppercase;
+  }
+
+  .ornament-bottom {
+    font-size: 1.2rem;
+    color: var(--bordeaux);
+    opacity: 0.25;
+    display: block;
+    text-align: center;
+    letter-spacing: 0.5em;
+    margin-top: 3rem;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<span class="label">Per te, soltanto per te</span>
+
+<div class="letter">
+  <span class="ornament">— ❧ —</span>
+
+  <div class="saluto">Miriam,</div>
+  <div class="divider"></div>
+
+  <div class="corpo">
+    <p>
+      Ti ricordo quella prima volta sull'autobus, a Partanna.
+      Non lo sapevi, ma da quel momento qualcosa era già cambiato.
+      C'era qualcosa nel tuo modo di stare al mondo che mi aveva colto di sorpresa,
+      e da allora non ho smesso di pensarci.
+    </p>
+    <p>
+      Sono passati due anni. Due anni in cui ti ho osservata da lontano,
+      cercando le parole giuste che continuavano a non arrivare.
+      Poi, finalmente, <em>il 25 maggio 2025</em> —
+      il giorno in cui il coraggio ha avuto la meglio sulla paura.
+      Il giorno che hai scelto di ricambiare.
+    </p>
+    <p>
+      Non ti ho mai detto quanto quel sorriso,
+      <em>il tuo sorriso</em>,
+      riesca a cambiare la forma di una giornata.
+      Basta quello. Basta vederti sorridere,
+      e tutto il resto smette di pesare.
+    </p>
+    <p>
+      Questa piccola caccia agli indizi che ti ho costruito
+      non è abbastanza per dirti tutto quello che sento.
+      Ma volevo che tu sapessi, in un modo che potessi portarti con te,
+      che quello che c'è tra noi per me non è ordinario.
+    </p>
+    <p>
+      <em>Ti amo.</em><br>
+      E intendo farlo per sempre.
+    </p>
+  </div>
+
+  <div class="firma">Con tutto quello che ho</div>
+  <div class="data-firma">25 · 05 · 2025</div>
+
+  <span class="ornament-bottom">— ❧ —</span>
+</div>
+
+</body>
+</html>
