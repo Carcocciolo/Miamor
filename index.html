@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Per te</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #f7f3ee;
+    --bordeaux: #6b1e2e;
+    --bordeaux-light: #8b2d3f;
+    --bordeaux-faint: rgba(107, 30, 46, 0.08);
+    --text: #2a1a1f;
+    --muted: #9a8a8e;
+  }
+
+  body {
+    background: var(--cream);
+    color: var(--text);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    overflow: hidden;
+  }
+
+  /* Decorative corner lines */
+  body::before, body::after {
+    content: '';
+    position: fixed;
+    width: 120px;
+    height: 120px;
+    border-color: var(--bordeaux);
+    border-style: solid;
+    opacity: 0.2;
+  }
+  body::before {
+    top: 2rem; left: 2rem;
+    border-width: 1px 0 0 1px;
+  }
+  body::after {
+    bottom: 2rem; right: 2rem;
+    border-width: 0 1px 1px 0;
+  }
+
+  .step-label {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--bordeaux);
+    margin-bottom: 3rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.2s forwards;
+  }
+
+  .card {
+    max-width: 520px;
+    width: 100%;
+    text-align: center;
+    opacity: 0;
+    animation: fadeUp 0.9s ease 0.4s forwards;
+  }
+
+  .ornament {
+    font-size: 1.4rem;
+    color: var(--bordeaux);
+    opacity: 0.4;
+    margin-bottom: 2rem;
+    display: block;
+    letter-spacing: 0.5em;
+  }
+
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.6rem, 5vw, 2.4rem);
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.5;
+    color: var(--text);
+    margin-bottom: 1rem;
+  }
+
+  .divider {
+    width: 40px;
+    height: 1px;
+    background: var(--bordeaux);
+    margin: 1.8rem auto;
+    opacity: 0.4;
+  }
+
+  .riddle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.1rem, 3vw, 1.35rem);
+    font-weight: 300;
+    line-height: 1.8;
+    color: var(--text);
+    margin-bottom: 0.6rem;
+  }
+
+  .hint {
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    margin-bottom: 2.5rem;
+  }
+
+  .input-wrap {
+    position: relative;
+    margin-bottom: 0.8rem;
+  }
+
+  input[type="text"] {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--bordeaux);
+    border-bottom-color: rgba(107, 30, 46, 0.35);
+    padding: 0.8rem 0.2rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-weight: 300;
+    color: var(--text);
+    text-align: center;
+    letter-spacing: 0.1em;
+    outline: none;
+    transition: border-color 0.3s;
+  }
+  input[type="text"]::placeholder { color: var(--muted); font-style: italic; }
+  input[type="text"]:focus { border-bottom-color: var(--bordeaux); }
+
+  button {
+    margin-top: 1.6rem;
+    background: transparent;
+    border: 1px solid var(--bordeaux);
+    color: var(--bordeaux);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 400;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    padding: 0.85rem 2.4rem;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  button:hover {
+    background: var(--bordeaux);
+    color: var(--cream);
+  }
+
+  .error-msg {
+    font-size: 0.75rem;
+    color: var(--bordeaux);
+    letter-spacing: 0.08em;
+    opacity: 0;
+    height: 1rem;
+    transition: opacity 0.3s;
+  }
+  .error-msg.show { opacity: 1; }
+
+  .shake {
+    animation: shake 0.4s ease;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes shake {
+    0%,100% { transform: translateX(0); }
+    25% { transform: translateX(-8px); }
+    75% { transform: translateX(8px); }
+  }
+</style>
+</head>
+<body>
+
+<span class="step-label">Tappa I di III</span>
+
+<div class="card">
+  <span class="ornament">— ❧ —</span>
+
+  <h1>C'è una data<br>che nessuno può dimenticare.</h1>
+
+  <div class="divider"></div>
+
+  <p class="riddle">
+    È il giorno in cui due cuori<br>
+    hanno smesso di girarsi intorno<br>
+    e hanno scelto di stare insieme.<br><br>
+    Il giorno in cui il coraggio<br>ha vinto sulla paura.
+  </p>
+
+  <p class="hint">scrivi la data senza spazi né trattini &nbsp;·&nbsp; es. 01011970</p>
+
+  <div class="input-wrap">
+    <input type="text" id="answer" placeholder="ggmmaaaa" maxlength="8" autocomplete="off" autocorrect="off" spellcheck="false">
+  </div>
+
+  <p class="error-msg" id="err">Non è quella. Cercala nel cuore.</p>
+
+  <button onclick="check()">Continua →</button>
+</div>
+
+<script>
+  document.getElementById('answer').addEventListener('keydown', e => {
+    if (e.key === 'Enter') check();
+  });
+
+  function check() {
+    const val = document.getElementById('answer').value.trim().toLowerCase().replace(/\s/g,'');
+    if (val === '25052025') {
+      document.querySelector('.card').style.transition = 'opacity 0.6s';
+      document.querySelector('.card').style.opacity = '0';
+      setTimeout(() => window.location.href = 'tappa2.html', 650);
+    } else {
+      const card = document.querySelector('.card');
+      card.classList.remove('shake');
+      void card.offsetWidth;
+      card.classList.add('shake');
+      document.getElementById('err').classList.add('show');
+    }
+  }
+</script>
+</body>
+</html>
