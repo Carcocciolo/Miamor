@@ -25,7 +25,6 @@
     align-items: center;
     justify-content: center;
     padding: 2rem;
-    overflow: hidden;
   }
   body::before, body::after {
     content: '';
@@ -163,6 +162,11 @@
   ];
   let idx = 0;
 
+  document.querySelector('.card').addEventListener('animationend', function() {
+    this.style.animation = 'none';
+    this.style.opacity = '1';
+  }, { once: true });
+
   document.getElementById('answer').addEventListener('keydown', e => {
     if (e.key === 'Enter') check();
   });
@@ -173,10 +177,10 @@
       document.querySelector('.card').style.opacity = '0';
       setTimeout(() => window.location.href = 'tappa3.html', 650);
     } else {
-      const card = document.querySelector('.card');
-      card.classList.remove('shake');
-      void card.offsetWidth;
-      card.classList.add('shake');
+      const input = document.getElementById('answer');
+      input.classList.remove('shake');
+      void input.offsetWidth;
+      input.classList.add('shake');
       const err = document.getElementById('err');
       err.classList.remove('show');
       void err.offsetWidth;
